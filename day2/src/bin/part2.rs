@@ -46,7 +46,7 @@ fn process(input: &str) -> impl ToString {
         }
     }
 
-    0
+    panic!("no answer was found")
 }
 
 #[cfg(test)]

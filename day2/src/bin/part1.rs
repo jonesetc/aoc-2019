@@ -12,13 +12,13 @@ fn run_program(mut program: Vec<u32>) -> u32 {
             1 => {
                 let (input1, input2, output) = (program[ip + 1], program[ip + 2], program[ip + 3]);
                 program[output as usize] = program[input1 as usize] + program[input2 as usize];
-            },
+            }
             2 => {
                 let (input1, input2, output) = (program[ip + 1], program[ip + 2], program[ip + 3]);
                 program[output as usize] = program[input1 as usize] * program[input2 as usize];
-            },
+            }
             99 => break,
-            _ => panic!("unsupported operation")
+            _ => panic!("unsupported operation"),
         }
     }
 
@@ -44,8 +44,11 @@ mod tests {
 
     #[test]
     fn example1() {
-        assert_eq!(run_program(vec![1,0,0,0,99]), 2);
-        assert_eq!(run_program(vec![1,1,1,4,99,5,6,0,99]), 30);
-        assert_eq!(run_program(vec![1,9,10,3,2,3,11,0,99,30,40,50]), 3_500);
+        assert_eq!(run_program(vec![1, 0, 0, 0, 99]), 2);
+        assert_eq!(run_program(vec![1, 1, 1, 4, 99, 5, 6, 0, 99]), 30);
+        assert_eq!(
+            run_program(vec![1, 9, 10, 3, 2, 3, 11, 0, 99, 30, 40, 50]),
+            3_500
+        );
     }
 }

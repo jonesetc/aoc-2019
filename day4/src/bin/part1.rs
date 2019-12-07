@@ -11,16 +11,19 @@ fn is_valid_password(password: u32) -> bool {
         .chars()
         .collect::<Vec<char>>()
         .windows(2)
-        .fold(
-            (true, false),
-            |(is_ordered, has_consecutive), curr| {
-                (is_ordered && (curr[0] <= curr[1]), has_consecutive || curr[0] == curr[1])
-            });
+        .fold((true, false), |(is_ordered, has_consecutive), curr| {
+            (
+                is_ordered && (curr[0] <= curr[1]),
+                has_consecutive || curr[0] == curr[1],
+            )
+        });
     is_ordered && has_consecutive
 }
 
 fn process(min: u32, max: u32) -> impl ToString {
-    (min..=max).filter(|&password| is_valid_password(password)).count()
+    (min..=max)
+        .filter(|&password| is_valid_password(password))
+        .count()
 }
 
 #[cfg(test)]

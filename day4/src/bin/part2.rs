@@ -13,19 +13,26 @@ fn is_valid_password(password: u32) -> bool {
         .windows(2)
         .fold(
             (true, false, false, false),
-            |(is_ordered, was_second_last_consecutive, was_last_consecutive, has_consecutive), curr| {
+            |(is_ordered, was_second_last_consecutive, was_last_consecutive, has_consecutive),
+             curr| {
                 (
                     is_ordered && (curr[0] <= curr[1]),
                     was_last_consecutive,
                     curr[0] == curr[1],
-                    has_consecutive || (!was_second_last_consecutive && was_last_consecutive && (curr[0] != curr[1]))
+                    has_consecutive
+                        || (!was_second_last_consecutive
+                            && was_last_consecutive
+                            && (curr[0] != curr[1])),
                 )
-            });
+            },
+        );
     is_ordered && (has_consecutive || (!was_second_last_consecutive && was_last_consecutive))
 }
 
 fn process(min: u32, max: u32) -> impl ToString {
-    (min..=max).filter(|&password| is_valid_password(password)).count()
+    (min..=max)
+        .filter(|&password| is_valid_password(password))
+        .count()
 }
 
 #[cfg(test)]

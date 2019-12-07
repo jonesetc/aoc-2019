@@ -5,9 +5,9 @@ fn main() {
 }
 
 fn calculate_launch_fuel(mass: u32) -> u32 {
-    std::iter::successors(Some(mass), |&last_mass| {
-        (last_mass / 3).checked_sub(2)
-    }).skip(1).sum()
+    std::iter::successors(Some(mass), |&last_mass| (last_mass / 3).checked_sub(2))
+        .skip(1)
+        .sum()
 }
 
 fn process(input: &str) -> impl ToString {
